@@ -1,0 +1,49 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/01/14 12:56:12 by jmatute-          #+#    #+#              #
+#    Updated: 2022/01/14 18:32:45 by jmatute-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+SRCS	= so_long.c
+
+LIBFT_DIR	= libft/
+
+OBJS	= ${SRCS:.c=.o}
+
+NAME	= so_long
+
+CC		= gcc
+
+RM		= rm -f
+
+CFLAGS	= -Wall -Wextra -Werror #-fsanitize=address
+
+MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
+
+.c.o: ${SRCS}
+			${CC} -c $< -o ${<:.c=.o}
+
+${NAME}:	${OBJS} Makefile
+			@make -sC ${LIBFT_DIR}
+			@cp ./libft/libft.a .
+			${CC} ${CFLAGS} ${MLXFLAGS} libft.a ${OBJS} -o ${NAME}
+
+all:		${NAME}
+
+clean:
+			@make -sC ${LIBFT_DIR} clean
+			${RM} ${OBJS} libft.a
+
+fclean:		clean
+			@make -sC ${LIBFT_DIR} fclean
+			${RM} ${NAME}
+
+re:			fclean all
+
+.PHONY:		all clean fclean re
