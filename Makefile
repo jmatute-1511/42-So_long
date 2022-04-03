@@ -6,11 +6,11 @@
 #    By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/14 12:56:12 by jmatute-          #+#    #+#              #
-#    Updated: 2022/01/14 18:32:45 by jmatute-         ###   ########.fr        #
+#    Updated: 2022/04/03 19:53:33 by jmatute-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= so_long.c
+SRCS	= so_long.c ./get_next_line/get_next_line_bonus.c errors.c fill_map.c utils_errors.c
 
 LIBFT_DIR	= libft/
 
