@@ -6,12 +6,12 @@
 #    By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/14 12:56:12 by jmatute-          #+#    #+#              #
-#    Updated: 2022/04/03 19:53:33 by jmatute-         ###   ########.fr        #
+#    Updated: 2022/04/04 16:03:13 by jmatute-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= so_long.c ./get_next_line/get_next_line_bonus.c errors.c fill_map.c utils_errors.c
-
+SRCS	=	so_long.c ./get_next_line/get_next_line_bonus.c errors.c fill_map.c \
+			utils_errors.c moves_on_map.c
 LIBFT_DIR	= libft/
 
 OBJS	= ${SRCS:.c=.o}

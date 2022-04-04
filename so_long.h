@@ -17,9 +17,13 @@
 #ifndef LEFT
 #define LEFT	0
 #endif
+#ifndef CLOSE
+#define CLOSE	53
+#endif
 typedef struct s_data
 {
 	void	*mlx;
+	void	*win;
 	void	*Floor;
 	void	*Items;
 	void	*Wall;
@@ -31,12 +35,14 @@ typedef struct s_data
 	void	*Exit;
 	int		x;
 	int		y;
+	int 	f_x;
+	int		f_y;
 	int		x_win;
 	int		y_win;
+	char	*map;
+	char **matrix_map;
 	int		high;
 	int		width;
-	void	*win;
-	char	*map;
 }			t_data;
 // ERRORS FUCTIONS
 int Map_is_Square(char *map);
@@ -55,6 +61,9 @@ int Size_of_high(char *map);
 int Size_of_widht(char *map);
 //FILL WINDOW
 void Create_Images(t_data *data, void *mlx);
-void Fill_Window(t_data *data, void *mlx, void *win, char *map);
+void Fill_Window(t_data *data, void *mlx, void *win, char **map);
+// LOGIC OF MOVES
+int Select_Action(int key, t_data *data);
+int Find_Ipoint(char **matrix,char cordinate);
 
 #endif

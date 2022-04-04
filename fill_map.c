@@ -6,7 +6,7 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 17:24:04 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/03 19:54:17 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/04 18:06:07 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,34 +65,37 @@ void Create_Images(t_data *data, void *mlx)
 }
 void Select_images(t_data *data,char c, void *mlx, void *win)
 {
-	mlx_put_image_to_window(mlx,win, data->Floor, data->x, data->y);
+	mlx_put_image_to_window(mlx,win, data->Floor, data->f_x, data->f_y);
 	if (c == '1')
-		mlx_put_image_to_window(mlx,win, data->Wall, data->x, data->y);
+		mlx_put_image_to_window(mlx,win, data->Wall, data->f_x, data->f_y);
 	if (c == 'C')
-		mlx_put_image_to_window(mlx,win, data->Items, data->x, data->y);
+		mlx_put_image_to_window(mlx,win, data->Items, data->f_x, data->f_y);
 	if (c == 'E')
-		mlx_put_image_to_window(mlx,win, data->Exit, data->x, data->y);
+		mlx_put_image_to_window(mlx,win, data->Exit, data->f_x, data->f_y);
 	if (c == 'P')
-		mlx_put_image_to_window(mlx,win, data->Right, data->x, data->y);
+		mlx_put_image_to_window(mlx,win, data->Right, data->f_x, data->f_y);
 }
-void Fill_Window(t_data *data, void *mlx, void *win, char *map)
+void Fill_Window(t_data *data, void *mlx, void *win, char **map)
 {
-	data->x = 0;
-	data->y = 0;
-	int count = 0;
+	int count;
+	int count2;
+
+	count = 0;
+	count2 = 0;
+	data->f_x = 0;
+	data->f_y = 0;
 	Create_Images(data, mlx);
 	while (map[count])
 	{
-		Select_images(data,map[count],mlx,win);
-		if(map[count] == '\n')
+		while (map[count][count2])
 		{
-			data->y += 32;
-			data->x = 0;
+			Select_images(data,map[count][count2],mlx,win);
+			data->f_x += 32;
+			count2++;
 		}
-		else
-			data->x += 32;
-		if(map[count + 1] == '\0')
-			Select_images(data,map[count],mlx,win);
+		data->f_x = 0;
+		data->f_y += 32;
+		count2 = 0;
 		count++;
 	}
 }
