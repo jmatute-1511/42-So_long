@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_errors.c                                     :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 19:48:54 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/03 19:53:57 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/05 14:34:21 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,17 @@ int Size_of_widht(char *map)
 	while (map[width] != '\n')
 		width++;
 	return(width);
+}
+int Full_Items(char *map)
+{
+	int full_items;
+
+	full_items = 0;
+	while (*map)
+	{
+		if (*map == 'C')
+			full_items++;
+		map++;
+	}
+	return (full_items);
 }

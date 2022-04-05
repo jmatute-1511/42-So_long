@@ -6,7 +6,7 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 17:24:04 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/04 18:06:07 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/05 19:20:28 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char *Fill_Array_Map(char **argv)
 			map = ft_strdup(line);
 		free(line);
 	}
+	close(fd);
 	return(map);
 }
 
@@ -84,7 +85,6 @@ void Fill_Window(t_data *data, void *mlx, void *win, char **map)
 	count2 = 0;
 	data->f_x = 0;
 	data->f_y = 0;
-	Create_Images(data, mlx);
 	while (map[count])
 	{
 		while (map[count][count2])

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Errors.c                                           :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 11:23:40 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/03 19:53:54 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/05 20:02:47 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,20 +109,26 @@ int Map_is_Valid(char *map)
 	return (0);
 }
 
-int Check_Error_Map(char *map)
+void Check_Error_Map(t_data *data)
 {
-	int lines;
-
-	lines = Size_of_high(map);
-	if (lines <= 2)
-		return(1);
-	if (Map_is_Square(map))
-		return(1);
-	if (Map_is_Close(map,lines))
-		return (1);
-	if (Map_is_Complete(map))
-		return (1);
-	if (Map_is_Valid(map))
-		return(1);
-	return (0);
+	if (Map_is_Square(data->map))
+	{
+		printf("Error \nMap is not Square\n");
+		Close_Window(data, 0);
+	}
+	if (Map_is_Close(data->map,data->y_win))
+	{
+		printf("Error \nSome Wall is open\n");
+		Close_Window(data, 0);
+	}
+	if (Map_is_Complete(data->map))
+	{
+		printf("Error \nMissign elements on the map\n");
+		Close_Window(data, 0);
+	}
+	if (Map_is_Valid(data->map))
+	{
+		printf("Error \nSome characte in the map is not valid\n");
+		Close_Window(data, 0);
+	}
 }

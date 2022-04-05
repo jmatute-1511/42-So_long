@@ -6,7 +6,7 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:12:48 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/04 19:27:31 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/05 19:56:31 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,17 @@ int Collect_Items(int key, t_data *data)
 		data->matrix_map[data->y][data->x] = '0';
 		return (1);
 	}
-	if (key == LEFT && data->matrix_map[data->y][data->x - 1] == 'C')
+	if (key == LEFT && data->matrix_map[data->y][data->x] == 'C')
 	{
 		data->matrix_map[data->y][data->x] = '0';
 		return (1);
 	}
-	if (key == DOWN && data->matrix_map[data->y + 1][data->x] == 'C')
+	if (key == DOWN && data->matrix_map[data->y][data->x] == 'C')
 	{
 		data->matrix_map[data->y][data->x] = '0';
 		return (1);
 	}
-	if (key == UP && data->matrix_map[data->y - 1][data->x] == 'C')
+	if (key == UP && data->matrix_map[data->y][data->x] == 'C')
 	{
 		data->matrix_map[data->y][data->x] = '0';
 		return (1);
@@ -83,6 +83,9 @@ int up(int key, t_data *data)
 	{
 		aux = data->y;
 		data->y = data->y - 1;
+		if (data->matrix_map[data->y][data->x] == 'C')
+			mlx_put_image_to_window(data->mlx, data->win, \
+			data->Floor,data->x * 32,data->y * 32);
 		mlx_put_image_to_window(data->mlx, data->win, \
 		data->Floor, data->x * 32, aux * 32);
 		mlx_put_image_to_window(data->mlx, data->win, \
@@ -92,14 +95,86 @@ int up(int key, t_data *data)
 	}
 	return (0);
 }
+int down(int key, t_data *data)
+{
+	int aux;
 
+	if (Crash(key,data))
+		return(0);
+	else
+	{
+		aux = data->y;
+		data->y = data->y + 1;
+		if (data->matrix_map[data->y][data->x] == 'C')
+			mlx_put_image_to_window(data->mlx, data->win, \
+			data->Floor,data->x * 32,data->y * 32);
+		mlx_put_image_to_window(data->mlx, data->win, \
+		data->Floor, data->x * 32, aux * 32);
+		mlx_put_image_to_window(data->mlx, data->win, \
+		data->Down,data->x * 32,data->y * 32);
+		if(Collect_Items(key, data))
+			return(1);
+	}
+	return (0);
+}
+int right(int key, t_data *data)
+{
+	int aux;
+
+	if (Crash(key,data))
+		return(0);
+	else
+	{
+		aux = data->x;
+		data->x = data->x + 1;
+		if (data->matrix_map[data->y][data->x] == 'C')
+			mlx_put_image_to_window(data->mlx, data->win, \
+			data->Floor,data->x * 32,data->y * 32);
+		mlx_put_image_to_window(data->mlx, data->win, \
+		data->Floor, aux * 32, data->y * 32);
+		mlx_put_image_to_window(data->mlx, data->win, \
+		data->Right,data->x * 32,data->y * 32);
+		if(Collect_Items(key, data))
+			return(1);
+	}
+	return (0);
+}
+int left(int key, t_data *data)
+{
+	int aux;
+
+	if (Crash(key,data))
+		return(0);
+	else
+	{
+		aux = data->x;
+		data->x = data->x - 1;
+		if (data->matrix_map[data->y][data->x] == 'C')
+			mlx_put_image_to_window(data->mlx, data->win, \
+			data->Floor,data->x * 32,data->y * 32);
+		mlx_put_image_to_window(data->mlx, data->win, \
+		data->Floor, aux * 32, data->y * 32);
+		mlx_put_image_to_window(data->mlx, data->win, \
+		data->Left,data->x * 32,data->y * 32);
+		if(Collect_Items(key, data))
+			return(1);
+	}
+	return (0);
+}
 int Select_Action(int key, t_data *data)
 {
+
 	if (key == UP)
-		up(key,data);
-	/*else if (key == DOWN)
+		data->items += up(key,data);
+	else if (key == DOWN)
+		data->items += down(key,data);
 	else if (key == RIGHT)
+		data->items += right(key,data);
 	else if (key == LEFT)
-	else if (key == CLOSE)*/
+		data->items += left(key, data);
+	else if (key == CLOSE)
+		Close_Window(data);
+	data->moves++;
+	printf("MOVES MADE -> ★ %d ★\n", data->moves);
 	return (key);
 }

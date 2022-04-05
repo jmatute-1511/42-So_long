@@ -33,6 +33,9 @@ typedef struct s_data
 	void	*Down;
 	void	*Sprite;
 	void	*Exit;
+	int		items;
+	int		Full_items;
+	int		moves;
 	int		x;
 	int		y;
 	int 	f_x;
@@ -50,7 +53,7 @@ int Map_is_Close(char * map, int lines);
 void Check_elements(char *map, int count,int *elements);
 int Map_is_Complete(char *map);
 int Map_is_Valid(char *map);
-int Check_Error_Map(char *map);
+void Check_Error_Map(t_data *data);
 
 // GET NEXT LINE
 int	get_next_line(int fd, char **line);
@@ -59,11 +62,14 @@ int	get_next_line(int fd, char **line);
 char *Fill_Array_Map(char **argv);
 int Size_of_high(char *map);
 int Size_of_widht(char *map);
+int Full_Items(char *map);
 //FILL WINDOW
 void Create_Images(t_data *data, void *mlx);
 void Fill_Window(t_data *data, void *mlx, void *win, char **map);
 // LOGIC OF MOVES
 int Select_Action(int key, t_data *data);
 int Find_Ipoint(char **matrix,char cordinate);
+// ClOSE WINDWOW
+int Close_Window(t_data *data, int mode);
 
 #endif
