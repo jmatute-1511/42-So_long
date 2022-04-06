@@ -6,7 +6,7 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 17:03:57 by jmatute-          #+#    #+#             */
-/*   Updated: 2021/10/16 17:04:00 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/06 17:41:18 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	*ft_strstr(const char *haystack, const char *needle);
+int		ft_strcmp(const char *s1, const char *s2);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 int		ft_isalnum(int c);

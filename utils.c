@@ -6,13 +6,13 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 19:48:54 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/05 14:34:21 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/06 20:19:28 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void Check_elements(char *map, int count,int *elements)
+void	check_elements(char *map, int count, int *elements)
 {
 	if (map[count] == '0')
 		elements[0] = 1;
@@ -23,10 +23,11 @@ void Check_elements(char *map, int count,int *elements)
 	if (map[count] == 'C')
 		elements[3] = 1;
 }
-int Size_of_high(char *map)
+
+int	size_of_high(char *map)
 {
-	int high;
-	int count;
+	int	high;
+	int	count;
 
 	high = 1;
 	count = 0;
@@ -38,18 +39,20 @@ int Size_of_high(char *map)
 	}
 	return (high);
 }
-int Size_of_widht(char *map)
+
+int	size_of_widht(char *map)
 {
-	int width;
+	int	width;
 
 	width = 0;
 	while (map[width] != '\n')
 		width++;
-	return(width);
+	return (width);
 }
-int Full_Items(char *map)
+
+int	full_items(char *map)
 {
-	int full_items;
+	int	full_items;
 
 	full_items = 0;
 	while (*map)

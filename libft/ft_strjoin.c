@@ -6,11 +6,21 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 11:56:30 by jmatute-          #+#    #+#             */
-/*   Updated: 2021/06/04 19:10:54 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/06 21:03:09 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
+
+void	bucles(const char *s2, int count2, int count, char *p)
+{
+	while (s2[count2])
+	{
+		(p[count] = s2[count2]);
+		(count += 1);
+		(count2 += 1);
+	}
+}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -28,9 +38,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!p)
 		return (NULL);
 	while (s1[count])
-		(p[count] = s1[count]) && (count++);
-	while (s2[count2])
-		(p[count] = s2[count2]) && (count += 1) && (count2 += 1);
+	{
+		(p[count] = s1[count]);
+		(count++);
+	}
+	bucles(s2, count2, count, p);
 	p[len] = '\0';
 	return (p);
 }
