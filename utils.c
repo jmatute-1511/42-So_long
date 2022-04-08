@@ -6,7 +6,7 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 19:48:54 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/06 20:19:28 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/07 16:42:21 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@ int	size_of_high(char *map)
 	int	high;
 	int	count;
 
-	high = 1;
 	count = 0;
+	if(map[count] == '1')
+		high = 1;
+	else
+		high = 0;
 	while (map[count])
 	{
-		if (map[count] == '\n')
+		if (map[count] == '\n' &&  map[count + 1] == '1')
 			high++;
 		count++;
 	}
@@ -43,9 +46,13 @@ int	size_of_high(char *map)
 int	size_of_widht(char *map)
 {
 	int	width;
+	int count;
 
 	width = 0;
-	while (map[width] != '\n')
+	count = 0;
+	while (map[count] != '1')
+		count++;
+	while (map[width + count] != '\n')
 		width++;
 	return (width);
 }

@@ -6,7 +6,7 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 17:24:04 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/06 20:35:39 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/08 22:05:42 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ char	*fill_array_map(char **argv)
 	fd = open(argv[1], O_RDONLY);
 	bolean = 1;
 	map = NULL;
+	bolean = get_next_line(fd, &line);
 	while (bolean != 0)
 	{
-		bolean = get_next_line(fd, &line);
 		if (map)
 		{
 			aux_map = ft_strnjoin(3, map, "\n", line);
@@ -36,7 +36,9 @@ char	*fill_array_map(char **argv)
 		else
 			map = ft_strdup(line);
 		free(line);
+		bolean = get_next_line(fd, &line);
 	}
+	free(line);
 	close (fd);
 	return (map);
 }

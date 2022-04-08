@@ -6,7 +6,7 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 16:38:41 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/06 21:11:34 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/08 22:08:10 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,13 @@ int	closewindow(t_data *data, int mode)
 {
 	if (mode != 0)
 		mlx_destroy_window(data->mlx, data->win);
-	free(data->map);
-	free_matrix(data->matrix_map);
+	if (data->map)
+	{
+		free(data->map);
+		free_matrix(data->matrix_map);
+	}
+	else
+		printf("ERROR\nFD Is empty\n");
 	exit (0);
 	return (0);
 }
@@ -25,6 +30,8 @@ int	closewindow(t_data *data, int mode)
 void	start_variables(t_data *data, char **argv)
 {
 	data->map = fill_array_map(argv);
+	if (data-> map == NULL)
+		closewindow(data,0);
 	data->matrix_map = ft_split(data->map, '\n');
 	data->x_win = size_of_widht(data->map) * 32;
 	data->y_win = size_of_high (data->map) * 32;
