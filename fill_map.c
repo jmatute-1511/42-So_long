@@ -6,41 +6,48 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 17:24:04 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/08 22:05:42 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/09 18:05:55 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-char	*fill_array_map(char **argv)
+void bucle(char *aux_map, char *line, char *map,int fd)
 {
-	int		fd;
-	int		bolean;
-	char	*map;
-	char	*aux_map;
-	char	*line;
+	int bolean;
 
-	fd = open(argv[1], O_RDONLY);
-	bolean = 1;
-	map = NULL;
 	bolean = get_next_line(fd, &line);
 	while (bolean != 0)
 	{
-		if (map)
+		if (line[0] != '\n' && map)
 		{
 			aux_map = ft_strnjoin(3, map, "\n", line);
 			free(map);
 			map = ft_strdup(aux_map);
 			free(aux_map);
 		}
-		else
+		else if (line[0] != '\n')
 			map = ft_strdup(line);
 		free(line);
 		bolean = get_next_line(fd, &line);
 	}
+}
+char	*fill_array_map(char **argv)
+{
+	int		fd;
+	char	*map;
+	char	*aux_map;
+	char	*line;
+
+	fd = open(argv[1], O_RDONLY);
+	map = NULL;
+
+	if (map)
+	{
+		aux_map = ft_strnjoin(3, map, "\n", line);
+		free(map);
+	}
 	free(line);
-	close (fd);
-	return (map);
+	return (aux_map);
 }
 
 void	create_images(t_data *data, void *mlx)

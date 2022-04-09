@@ -6,7 +6,7 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 11:23:40 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/08 21:58:35 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/09 17:29:10 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int	map_is_square(char *map)
 			aux_line = line;
 			line = 0;
 		}
-		if(map[count] != '\n')
+		if (map[count] != '\n')
 			line++;
 		count++;
 	}
 	if (aux_line != line && line != 0)
-				return (1);
+		return (1);
 	return (0);
 }
 
@@ -112,7 +112,7 @@ int	map_is_valid(char *map)
 
 void	check_error_map(t_data *data)
 {
-	int lines;
+	int	lines;
 
 	lines = size_of_high(data->map);
 	if (map_is_close(data->map, lines))
