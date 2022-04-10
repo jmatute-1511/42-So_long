@@ -6,7 +6,7 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 19:48:54 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/09 15:22:13 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/10 15:20:49 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ void	check_elements(char *map, int count, int *elements)
 	if (map[count] == 'E')
 		elements[1] = 1;
 	if (map[count] == 'P')
-		elements[2] = 1;
+	{
+		if (elements[2] == 1)
+			map[count] = '0';
+		else
+			elements[2] = 1;
+	}
 	if (map[count] == 'C')
 		elements[3] = 1;
 }

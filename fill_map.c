@@ -6,14 +6,15 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 17:24:04 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/09 18:05:55 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/10 16:51:12 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-void bucle(char *aux_map, char *line, char *map,int fd)
+
+static char	*bucle(char *aux_map, char *line, char *map, int fd)
 {
-	int bolean;
+	int	bolean;
 
 	bolean = get_next_line(fd, &line);
 	while (bolean != 0)
@@ -30,7 +31,15 @@ void bucle(char *aux_map, char *line, char *map,int fd)
 		free(line);
 		bolean = get_next_line(fd, &line);
 	}
+	if (map)
+	{
+		aux_map = ft_strnjoin(3, map, "\n", line);
+		free(map);
+	}
+	free(line);
+	return (aux_map);
 }
+
 char	*fill_array_map(char **argv)
 {
 	int		fd;
@@ -40,14 +49,9 @@ char	*fill_array_map(char **argv)
 
 	fd = open(argv[1], O_RDONLY);
 	map = NULL;
-
-	if (map)
-	{
-		aux_map = ft_strnjoin(3, map, "\n", line);
-		free(map);
-	}
-	free(line);
-	return (aux_map);
+	aux_map = NULL;
+	map = bucle(aux_map, line, map, fd);
+	return (map);
 }
 
 void	create_images(t_data *data, void *mlx)

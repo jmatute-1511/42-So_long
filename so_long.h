@@ -6,7 +6,7 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 20:19:54 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/09 17:57:53 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/10 15:47:43 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		map_is_square(char *map);
 int		map_is_close(char *map, int lines);
 int		map_is_complete(char *map);
 int		map_is_valid(char *map);
-void	check_error_map(t_data *data);
+void	check_error_map(t_data *data, char **argv);
 void	check_elements(char *map, int count, int *elements);
 
 // GET NEXT LINE

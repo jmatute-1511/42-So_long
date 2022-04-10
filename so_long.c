@@ -6,7 +6,7 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 16:38:41 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/09 17:18:18 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/10 15:46:48 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,17 @@ int	closewindow(t_data *data, int mode)
 	if (data->map)
 	{
 		free(data->map);
-		free_matrix(data->matrix_map);
+		if (data->matrix_map)
+			free_matrix(data->matrix_map);
 	}
 	else
 		printf("ERROR\nThe map does not meets the requirements\n");
-	//system("leaks so_long");
 	exit (0);
 	return (0);
 }
 
 void	start_variables(t_data *data, char **argv)
 {
-	data->map = fill_array_map(argv);
-	if (data-> map == NULL)
-		closewindow(data, 0);
 	data->matrix_map = ft_split(data->map, '\n');
 	data->x_win = size_of_widht(data->map) * 32;
 	data->y_win = size_of_high (data->map) * 32;
@@ -58,13 +55,13 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (0);
 	str = ft_strstr(argv[1], ".ber");
-	if (str == 0)
+	if (str == 0 || open(argv[1], O_RDONLY) == -1)
 	{
 		printf("Error\n Map is not valid");
 		return (0);
 	}
+	check_error_map(&data, argv);
 	start_variables(&data, argv);
-	check_error_map(&data);
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, data.x_win, data.y_win, "so_long");
 	create_images(&data, data.mlx);

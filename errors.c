@@ -6,7 +6,7 @@
 /*   By: jmatute- <jmatute-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 11:23:40 by jmatute-          #+#    #+#             */
-/*   Updated: 2022/04/09 17:29:10 by jmatute-         ###   ########.fr       */
+/*   Updated: 2022/04/10 15:47:50 by jmatute-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,29 +110,24 @@ int	map_is_valid(char *map)
 	return (0);
 }
 
-void	check_error_map(t_data *data)
+void	check_error_map(t_data *data, char **argv)
 {
 	int	lines;
+	int	flag;
 
+	data->map = fill_array_map(argv);
+	if (data-> map == NULL)
+		closewindow(data, 0);
 	lines = size_of_high(data->map);
+	flag = 0;
 	if (map_is_close(data->map, lines))
-	{
-		printf("Error \nSome Wall is open\n");
+		flag = printf("Error \nSome Wall is open\n");
+	else if (map_is_square(data->map))
+		flag = printf("Error \nMap is not Square\n");
+	else if (map_is_complete(data->map))
+		flag = printf("Error \nMissign elements on the map\n");
+	else if (map_is_valid(data->map))
+		flag = printf("Error \nSome character in the map is not valid\n");
+	if (flag > 0)
 		closewindow(data, 0);
-	}
-	if (map_is_square(data->map))
-	{
-		printf("Error \nMap is not Square\n");
-		closewindow(data, 0);
-	}
-	if (map_is_complete(data->map))
-	{
-		printf("Error \nMissign elements on the map\n");
-		closewindow(data, 0);
-	}
-	if (map_is_valid(data->map))
-	{
-		printf("Error \nSome character in the map is not valid\n");
-		closewindow(data, 0);
-	}
 }
